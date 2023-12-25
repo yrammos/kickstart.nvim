@@ -383,11 +383,19 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-u>'] = false,
+              ['<C-d>'] = false,
+              ['<C-t>'] = require('trouble').open_with_trouble,
+              ['<C-enter>'] = 'to_fuzzy_refine',
+            },
+            n = {
+              ['<C-t>'] = require('trouble').open_with_trouble,
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -615,6 +623,8 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      --  In reality, configurations are arguments passed to the nvim-lspconfig `require('lspconfig')[<servername>].setup()` method for the given server
+      --  (see https://github.com/neovim/nvim-lspconfig/wiki/Understanding-setup-%7B%7D for documentation of all available keys).
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -640,6 +650,48 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        ltex = {
+          settings = {},
+        },
+        texlab = {
+          settings = {
+            texlab = {
+              build = {
+                executable = 'latexmk',
+                args = { '-p', '-outdir=out', '-synctex=1', '-xelatex', '%f' },
+                forwardSearchAfter = true,
+                onSave = true,
+                auxDirectory = './out',
+                logDirectory = './out',
+                pdfDirectory = './out',
+              },
+              forwardSearch = {
+                executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
+                args = { '-background', '-readingbar', '%l', '%p', '%f' },
+              },
+              formatterLineLength = 0,
+              experimental = {
+                citationCommands = { 'autocite' },
+                labelDefinitionCommands = {},
+                labelReferenceCommands = {},
+              },
+              chktex = {
+                onOpenAndSave = false,
+                onEdit = true,
+              },
+            },
+          },
+        },
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              -- Any extra CLI arguments for `ruff` go here.
+              args = {
+                -- config = { "~/temp/pyproject.toml" },
+              },
             },
           },
         },
@@ -715,6 +767,9 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
+        python = { 'ruff' },
+        markdown = { 'markdownlint' },
+        latex = { 'latexindent' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -808,14 +863,14 @@ require('lazy').setup({
           --    $body
           --  end
           --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          -- <D-l> (Opt-l) will move you to the right of each of the expansion locations.
+          -- <D-h> (Opt-h) is similar, except moving you backwards.
+          ['<D-l>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<D-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
@@ -913,6 +968,9 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      modules = {},
+      sync_install = false,
+      ignore_install = {},
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -931,18 +989,18 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
