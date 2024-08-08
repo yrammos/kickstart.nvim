@@ -47,24 +47,4 @@ vim.keymap.set('n', '<C-p>', '<cmd>bprev<CR>', { silent = true })
 -- Telescope
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 
--- Trouble
-vim.keymap.set('n', '<leader>xx', function()
-  require('trouble').toggle()
-end, { desc = 'Toggle Trouble' })
-vim.keymap.set('n', '<leader>xw', function()
-  require('trouble').toggle 'workspace_diagnostics'
-end, { desc = 'Toggle [W]orkspace diagnostics in Trouble' })
-vim.keymap.set('n', '<leader>xd', function()
-  require('trouble').toggle 'document_diagnostics'
-end, { desc = 'Toggle [D]ocument diagnostics in Trouble' })
-vim.keymap.set('n', '<leader>xq', function()
-  require('trouble').toggle 'quickfix'
-end, { desc = 'Toggle [Q]uickfix in Trouble' })
-vim.keymap.set('n', '<leader>xl', function()
-  require('trouble').toggle 'loclist'
-end, { desc = 'Toggle [L]ocation list in Trouble' })
-vim.keymap.set('n', 'gR', function()
-  require('trouble').toggle 'lsp_references'
-end, { desc = 'Toggle LSP [R]eferences in Trouble' })
-
 return {}
