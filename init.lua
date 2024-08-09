@@ -402,8 +402,6 @@ require('lazy').setup({
         defaults = {
           mappings = {
             i = {
-              ['<C-u>'] = false,
-              ['<C-d>'] = false,
               ['<C-t>'] = require('trouble').open_with_trouble,
               ['<C-enter>'] = 'to_fuzzy_refine',
             },
@@ -968,7 +966,7 @@ require('lazy').setup({
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      statusline.setup { use_icons = true }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
