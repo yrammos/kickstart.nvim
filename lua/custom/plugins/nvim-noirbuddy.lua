@@ -14,7 +14,4 @@ return {
     -- preset = 'slate',
     -- preset = 'crt-amber',
   },
-  -- init = function()
-  --   vim.cmd.colorscheme 'noirbuddy'
-  -- end,
 }
