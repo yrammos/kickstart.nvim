@@ -978,6 +978,28 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+      local starterscreen = require 'mini.starter'
+      starterscreen.setup {
+        evaluate_single = true,
+        header = '',
+        footer = '',
+        items = {
+          starterscreen.sections.builtin_actions(),
+          starterscreen.sections.recent_files(10, false),
+          starterscreen.sections.recent_files(10, true),
+          starterscreen.sections.telescope(),
+          -- Use this if you set up 'mini.sessions'
+          starterscreen.sections.sessions(5, true),
+        },
+        content_hooks = {
+          starterscreen.gen_hook.adding_bullet(),
+          starterscreen.gen_hook.aligning('center', 'center'),
+          starterscreen.gen_hook.indexing('all', { 'Builtin actions' }),
+          starterscreen.gen_hook.padding(3, 2),
+        },
+      }
+
+      require('mini.sessions').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
