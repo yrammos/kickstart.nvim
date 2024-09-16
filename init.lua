@@ -990,6 +990,7 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      require('mini.icons').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -1030,6 +1031,8 @@ require('lazy').setup({
       }
 
       require('mini.sessions').setup()
+      require('mini.git').setup()
+      require('mini.diff').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
