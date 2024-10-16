@@ -1,7 +1,25 @@
 return {
+  -- UI and text color plugins.
   {
     'HiPhish/rainbow-delimiters.nvim',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre', 'VeryLazy' },
+  },
+  {
+    'xiyaowong/transparent.nvim',
+    lazy = false,
+    event = 'VimEnter',
+  },
+  -- Themes.
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    -- init = function()
+    -- vim.cmd.colorscheme 'tokyonight'
+    -- ... or 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+
+    -- You can configure highlights by doing something like:
+    --   vim.cmd.hi 'Comment gui=none'
+    -- end,
   },
   { 'EdenEast/nightfox.nvim' },
   {
@@ -18,7 +36,7 @@ return {
   {
     'srcery-colors/srcery-vim',
     config = function()
-      vim.cmd.colorscheme 'srcery'
+      -- vim.cmd.colorscheme 'srcery'
     end,
   },
   {
@@ -57,15 +75,15 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      -- preset = 'crt-green',
-      preset = 'kiwi',
+      preset = 'crt-green',
+      -- preset = 'kiwi',
       -- preset = 'miami-nights',
       -- preset = 'minimal',
       -- preset = 'slate',
       -- preset = 'crt-amber',
     },
     install = {
-      -- colorscheme = { 'noirbuddy' },
+      colorscheme = { 'noirbuddy' },
     },
   },
   {
@@ -84,5 +102,11 @@ return {
     init = function()
       -- vim.cmd.colorscheme 'poimandres'
     end,
+  },
+  {
+    '0xstepit/flow.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
 }
