@@ -830,6 +830,18 @@ require('lazy').setup({
         latex = { 'latexindent' },
         json = { 'prettierd' },
         html = { 'prettierd' },
+        css = { 'prettierd' },
+        angular = { 'prettierd' },
+        flow = { 'prettierd' },
+        graphql = { 'prettierd' },
+        jsx = { 'prettierd' },
+        javascript = { 'prettierd' },
+        less = { 'prettierd' },
+        scss = { 'prettierd' },
+        typescript = { 'prettierd' },
+        vue = { 'prettierd' },
+        yaml = { 'prettierd' },
+        xml = { 'xmlformat' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
