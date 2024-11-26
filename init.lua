@@ -743,14 +743,9 @@ require('lazy').setup({
             },
           },
         },
-        ruff_lsp = {
+        ruff = {
           init_options = {
-            settings = {
-              -- Any extra CLI arguments for `ruff` go here.
-              args = {
-                -- config = { "~/temp/pyproject.toml" },
-              },
-            },
+            settings = {},
           },
         },
       }
