@@ -751,11 +751,11 @@ require('lazy').setup({
             },
           },
         },
-        ruff = {
-          init_options = {
-            settings = {},
-          },
-        },
+        -- ruff = {
+        --   init_options = {
+        --     settings = {},
+        --   },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
@@ -1014,6 +1014,7 @@ require('lazy').setup({
       require('mini.sessions').setup()
       require('mini.git').setup()
       require('mini.diff').setup()
+      require('mini.pairs').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
