@@ -1,9 +1,4 @@
 return {
-  -- UI and text color plugins.
-  {
-    'HiPhish/rainbow-delimiters.nvim',
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre', 'VeryLazy' },
-  },
   {
     'xiyaowong/transparent.nvim',
     lazy = false,
