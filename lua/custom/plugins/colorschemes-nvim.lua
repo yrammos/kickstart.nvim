@@ -77,9 +77,6 @@ return {
       -- preset = 'slate',
       -- preset = 'crt-amber',
     },
-    install = {
-      colorscheme = { 'noirbuddy' },
-    },
   },
   {
     'olivercederborg/poimandres.nvim',
@@ -103,5 +100,16 @@ return {
     lazy = false,
     priority = 1000,
     opts = {},
+  },
+  {
+    'webhooked/kanso.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('kanso').setup {
+        colors = { theme = 'ink' },
+        vim.cmd.colorscheme 'kanso',
+      }
+    end,
   },
 }

@@ -720,7 +720,10 @@ require('lazy').setup({
           },
         },
         ltex = {
-          settings = {},
+          settings = {
+            ltex = {},
+          },
+          filetypes = { 'bibtex', 'context', 'context.tex', 'latex', 'markdown', 'mdx', 'org', 'restructuredtext', 'rsweave' },
         },
         texlab = {
           settings = {
