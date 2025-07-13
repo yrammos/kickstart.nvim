@@ -832,7 +832,7 @@ require('lazy').setup({
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         python = { 'ruff' },
-        markdown = { 'markdownlint' },
+        markdown = { 'prettierd' },
         latex = { 'latexindent' },
         json = { 'prettierd' },
         html = { 'prettierd' },
