@@ -8,7 +8,11 @@ return {
       suggestion = { enabled = false },
       panel = { enabled = false },
       filetypes = {
-        ['.'] = true,
+        markdown = false,
+        tex = false,
+        text = false,
+        gitcommit = false,
+        help = false,
       },
     },
   },
