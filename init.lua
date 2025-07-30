@@ -719,9 +719,9 @@ require('lazy').setup({
             },
           },
         },
-        ltex = {
+        ltex_plus = {
           settings = {
-            ltex = {},
+            ltex_plus = {},
           },
           filetypes = { 'bibtex', 'context', 'context.tex', 'latex', 'markdown', 'mdx', 'org', 'restructuredtext', 'rsweave' },
         },
