@@ -63,22 +63,6 @@ return {
     end,
   },
   {
-    'jesseleite/nvim-noirbuddy',
-    dependencies = {
-      { 'tjdevries/colorbuddy.nvim' },
-    },
-    lazy = false,
-    priority = 1000,
-    opts = {
-      preset = 'crt-green',
-      -- preset = 'kiwi',
-      -- preset = 'miami-nights',
-      -- preset = 'minimal',
-      -- preset = 'slate',
-      -- preset = 'crt-amber',
-    },
-  },
-  {
     'olivercederborg/poimandres.nvim',
     lazy = false,
     priority = 1000,
