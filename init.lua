@@ -720,6 +720,14 @@ require('lazy').setup({
           },
         },
         ltex_plus = {
+          capabilities = capabilities,
+          on_attach = function(client, bufnr)
+            -- your other on_attach code
+            -- for example, set keymaps here, like
+            -- vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+            -- (see below code block for more details)
+            require('ltex-utils').on_attach(bufnr)
+          end,
           settings = {
             ltex_plus = {},
           },
