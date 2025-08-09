@@ -728,6 +728,7 @@ require('lazy').setup({
         texlab = {
           settings = {
             texlab = {
+              bibtexFormatter = 'texlab',
               build = {
                 executable = 'latexmk',
                 args = { '-p', '-outdir=out', '-synctex=1', '-xelatex', '%f' },
