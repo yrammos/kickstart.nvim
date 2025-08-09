@@ -856,6 +856,7 @@ require('lazy').setup({
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
+    build = 'cargo +nightly build --release',
     version = '1.*',
     dependencies = {
       -- Snippet Engine
