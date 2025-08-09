@@ -756,11 +756,14 @@ require('lazy').setup({
             },
           },
         },
-        -- ruff = {
-        --   init_options = {
-        --     settings = {},
-        --   },
-        -- },
+        ruff = {},
+        ty = {},
+        pyrefly = {},
+        cssls = {},
+        ts_ls = {},
+        jsonls = {},
+        lemminx = {},
+        marksman = {},
       }
 
       -- Ensure the servers and tools above are installed
