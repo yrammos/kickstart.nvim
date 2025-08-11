@@ -705,6 +705,8 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
+        bashls = {},
+        shfmt = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -837,23 +839,24 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
-        python = { 'ruff_format' },
-        markdown = { 'prettierd' },
-        tex = { 'tex-fmt' },
-        json = { 'prettierd' },
-        html = { 'prettierd' },
-        css = { 'prettierd' },
         angular = { 'prettierd' },
+        bash = { 'shfmt' },
+        css = { 'prettierd' },
         flow = { 'prettierd' },
         graphql = { 'prettierd' },
-        jsx = { 'prettierd' },
+        html = { 'prettierd' },
         javascript = { 'prettierd' },
+        json = { 'prettierd' },
+        jsx = { 'prettierd' },
         less = { 'prettierd' },
+        markdown = { 'prettierd' },
+        python = { 'ruff_format' },
         scss = { 'prettierd' },
+        tex = { 'tex-fmt' },
         typescript = { 'prettierd' },
         vue = { 'prettierd' },
-        yaml = { 'prettierd' },
         xml = { 'xmlformat' },
+        yaml = { 'prettierd' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
