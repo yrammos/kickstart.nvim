@@ -1018,7 +1018,7 @@ require('lazy').setup({
           starterscreen.sections.recent_files(10, true),
           starterscreen.sections.telescope(),
           -- Use this if you set up 'mini.sessions'
-          starterscreen.sections.sessions(5, true),
+          -- starterscreen.sections.sessions(5, true),
         },
         content_hooks = {
           starterscreen.gen_hook.adding_bullet(),
