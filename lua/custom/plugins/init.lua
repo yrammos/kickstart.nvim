@@ -6,7 +6,7 @@
 -- VARIOUS OPTIONS
 -- [[ Python settings ]]
 vim.g.python_host_prog = '/usr/bin/python'
-vim.g.python3_host_prog = '$HOME/.local/share/mamba/envs/neovim/bin/python3'
+vim.g.python3_host_prog = '$HOME/.micromamba/envs/neovim/bin/python'
 
 -- Auto-save in swap
 vim.g.updatecount = 100
