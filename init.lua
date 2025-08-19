@@ -672,6 +672,7 @@ require('lazy').setup({
             return diagnostic_message[diagnostic.severity]
           end,
         },
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Op[E]n diagnostics float' }),
       }
 
       -- LSP servers and clients are able to communicate to each other what features they support.
