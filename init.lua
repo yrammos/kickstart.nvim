@@ -707,21 +707,9 @@ require('lazy').setup({
         --
 
         bashls = {},
-        shfmt = {},
-        lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
+        cssls = {},
+        jsonls = {},
+        lemminx = {},
         ltex_plus = {
           capabilities = capabilities,
           on_attach = function(client, bufnr)
@@ -736,6 +724,24 @@ require('lazy').setup({
           },
           filetypes = { 'bibtex', 'context', 'context.tex', 'latex', 'markdown', 'mdx', 'org', 'restructuredtext', 'rsweave' },
         },
+        lua_ls = {
+          -- cmd = { ... },
+          -- filetypes = { ... },
+          -- capabilities = {},
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        marksman = {},
+        pyrefly = {},
+        ruff = {},
+        shfmt = {},
         texlab = {
           settings = {
             texlab = {
@@ -767,14 +773,8 @@ require('lazy').setup({
             },
           },
         },
-        ruff = {},
-        ty = {},
-        pyrefly = {},
-        cssls = {},
         ts_ls = {},
-        jsonls = {},
-        lemminx = {},
-        marksman = {},
+        ty = {},
       }
 
       -- Ensure the servers and tools above are installed
