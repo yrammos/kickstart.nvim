@@ -773,7 +773,6 @@ require('lazy').setup({
             },
           },
         },
-        ts_ls = {},
         ty = {},
       }
 
