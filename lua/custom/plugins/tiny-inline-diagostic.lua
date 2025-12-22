@@ -71,10 +71,10 @@ return {
         -- Can be a boolean or a table with detailed options
         multilines = {
           -- Enable multiline diagnostic messages
-          enabled = false,
+          enabled = true,
 
           -- Always show messages on all lines for multiline diagnostics
-          always_show = false,
+          always_show = true,
 
           -- Trim whitespaces from the start/end of each line
           trim_whitespaces = false,
@@ -84,7 +84,7 @@ return {
         },
 
         -- Display all diagnostic messages on the cursor line, not just those under cursor
-        show_all_diags_on_cursorline = false,
+        show_all_diags_on_cursorline = true,
 
         -- Enable diagnostics in Insert mode
         -- If enabled, consider setting throttle to 0 to avoid visual artifacts
