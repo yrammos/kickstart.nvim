@@ -8,22 +8,6 @@
 vim.g.python_host_prog = '/usr/bin/python'
 vim.g.python3_host_prog = '$HOME/.micromamba/envs/neovim/bin/python'
 
--- Auto-save in swap
-vim.g.updatecount = 100
-
--- Display relative numbers
-vim.wo.relativenumber = true
-
--- Highlight current line
-vim.opt.cursorline = true
-
--- Soft wrapping settings
-vim.o.linebreak = true
-
--- Scrolling context
-vim.o.scrolloff = 1
-vim.o.sidescrolloff = 3
-
 -- KEYMAPS
 -- Switch from insert to normal mode using jk and kj
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
