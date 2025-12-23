@@ -799,6 +799,7 @@ require('lazy').setup({
         },
       }
       require('mini.diff').setup()
+      require('mini.cmdline').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
