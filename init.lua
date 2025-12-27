@@ -557,6 +557,7 @@ require('lazy').setup({
           },
         },
         ty = {},
+        yamlls = {},
       }
 
       -- Ensure the servers and tools above are installed
