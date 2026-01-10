@@ -91,7 +91,10 @@ return {
     priority = 1000,
     config = function()
       require('kanso').setup {
-        colors = { theme = 'ink' },
+        background = { -- map the value of 'background' option to a theme
+          dark = 'mist', -- try "zen", "mist" or "pearl" !
+          light = 'mist', -- try "zen", "mist" or "pearl" !
+        },
         vim.cmd.colorscheme 'kanso',
       }
     end,
