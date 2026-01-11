@@ -502,7 +502,7 @@ require('lazy').setup({
         lemminx = {},
         ltex_plus = {
           capabilities = capabilities,
-          on_attach = function(client, bufnr)
+          on_attach = function(_, bufnr)
             require('ltex-utils').on_attach(bufnr)
           end,
           settings = {
