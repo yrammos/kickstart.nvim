@@ -557,7 +557,6 @@ require('lazy').setup({
             },
           },
         },
-        ty = {},
         yamlls = {},
       }
 
