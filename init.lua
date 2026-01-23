@@ -573,25 +573,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      -- Use mason-lspconfig to configure servers that don't need any custom settings.
-      -- Ultimately, this should become unnecessary.
-      require('mason-lspconfig').setup {
-        handlers = {
-          -- Default handler for servers we don't customize
-          function(server_name)
-            if not servers[server_name] or vim.tbl_isempty(servers[server_name]) then
-              require('lspconfig')[server_name].setup {
-                capabilities = capabilities,
-              }
-            end
-          end,
-        },
-      }
-
-      -- Use lspconfig to configure settings with custom settings
-      -- (having already ensured that mason-lspconfig has not already configured the server with defaults).
-      local _ = require 'lspconfig'
+      require('mason-lspconfig').setup {}
       for server_name, server_config in pairs(servers) do
         server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
         vim.lsp.config(server_name, server_config)
