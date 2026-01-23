@@ -145,6 +145,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
+-- Set LSP logging level.
+vim.lsp.set_log_level 'warn'
+
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
