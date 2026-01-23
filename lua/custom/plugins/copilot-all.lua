@@ -13,7 +13,17 @@ return {
         text = false,
         gitcommit = false,
         help = false,
+        ['.'] = false,
+        ['*'] = true,
       },
+      should_attach = function(bufnr)
+        local ft = vim.bo[bufnr].filetype
+        local exclude = { 'markdown', 'latex', 'tex', 'plaintex', 'text', 'typst', 'help', 'org', 'taskpaper', 'norg', 'quarto', 'rmd', 'bib' }
+        if vim.tbl_contains(exclude, ft) then
+          return false
+        end
+        return true
+      end,
     },
   },
   {
