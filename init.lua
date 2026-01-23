@@ -533,7 +533,6 @@ require('lazy').setup({
         },
         marksman = {},
         ruff = {},
-        shfmt = {},
         texlab = {
           settings = {
             texlab = {
