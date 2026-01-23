@@ -529,9 +529,6 @@ require('lazy').setup({
         ruff = {},
         shfmt = {},
         texlab = {
-          on_init = function(client)
-            client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
-          end,
           settings = {
             texlab = {
               bibtexFormatter = 'texlab',
