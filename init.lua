@@ -624,7 +624,7 @@ require('lazy').setup({
         flow = { 'prettierd' },
         graphql = { 'prettierd' },
         html = { 'prettierd' },
-        -- javascript = { 'prettierd' },
+        javascript = { 'prettierd' },
         json = { 'prettierd' },
         jsx = { 'prettierd' },
         latex = { 'tex-fmt' },
