@@ -504,14 +504,22 @@ require('lazy').setup({
         jsonls = {},
         lemminx = {},
         ltex_plus = {
-          capabilities = capabilities,
           on_attach = function(_, bufnr)
             require('ltex-utils').on_attach(bufnr)
           end,
           settings = {
-            ltex_plus = {},
+            -- See https://ltex-plus.github.io/ltex-plus/settings.html
+            ltex = {
+              language = 'en-US',
+              configurationTarget = {
+                dictionary = 'userExternalFile',
+                disabledRules = 'userExternalFile',
+                hiddenFalsePositives = 'userExternalFile',
+              },
+              trace = { server = 'off' },
+            },
           },
-          filetypes = { 'bibtex', 'context', 'context.tex', 'latex', 'markdown', 'mdx', 'org', 'restructuredtext', 'rsweave' },
+          filetypes = { 'bibtex', 'context', 'context.tex', 'latex', 'markdown', 'mdx', 'org', 'restructuredtext', 'rsweave', 'tex' },
         },
         lua_ls = {
           settings = {
