@@ -524,7 +524,6 @@ require('lazy').setup({
           },
         },
         marksman = {},
-        pyrefly = {},
         ruff = {},
         shfmt = {},
         texlab = {
