@@ -23,7 +23,7 @@ vim.o.showmode = false
 vim.g.updatecount = 100
 
 -- Highlight current line
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Soft wrapping settings
 vim.o.linebreak = true
@@ -31,6 +31,9 @@ vim.o.linebreak = true
 -- Scrolling context
 vim.o.scrolloff = 1
 vim.o.sidescrolloff = 3
+
+-- Relying on blink.cmp for autocompletion on the command line.
+vim.opt.wildmenu = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -76,9 +79,6 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
-
--- Show which line your cursor is on
-vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
