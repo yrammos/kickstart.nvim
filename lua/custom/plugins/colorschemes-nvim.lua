@@ -1,102 +1,81 @@
 return {
-  {
-    'xiyaowong/transparent.nvim',
-    lazy = false,
-    event = 'VimEnter',
-  },
-  -- Themes.
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    -- init = function()
-    -- vim.cmd.colorscheme 'tokyonight'
-    -- ... or 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-
-    -- You can configure highlights by doing something like:
-    --   vim.cmd.hi 'Comment gui=none'
-    -- end,
-  },
-  { 'EdenEast/nightfox.nvim' },
-  {
-    'sainnhe/everforest',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- Optionally configure and load the colorscheme
-      -- directly inside the plugin declaration.
-      -- vim.g.everforest_enable_italic = true
-      -- vim.cmd.colorscheme('everforest')
-    end,
-  },
-  {
-    'srcery-colors/srcery-vim',
-    config = function()
-      -- vim.cmd.colorscheme 'srcery'
-    end,
-  },
-  {
-    'slugbyte/lackluster.nvim',
-    lazy = false,
-    priority = 1000,
-    init = function()
-      -- vim.cmd.colorscheme 'lackluster'
-      -- vim.cmd.colorscheme 'lackluster-hack'
-      -- vim.cmd.colorscheme 'lackluster-mint'
-    end,
-  },
-  {
-    'iruzo/matrix-nvim',
-    config = function()
-      -- vim.g.matrix_contrast = true
-      -- vim.g.matrix_borders = false
-      -- vim.g.matrix_disable_background = false
-      -- vim.g.matrix_italic = false
-      -- vim.cmd.colorscheme 'matrix'
-    end,
-  },
-  {
-    'ramojus/mellifluous.nvim',
-    lazy = false,
-    priority = 1000,
-    init = function()
-      -- vim.cmd.colorscheme 'mellifluous'
-    end,
-  },
-  {
-    'olivercederborg/poimandres.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('poimandres').setup {
-        -- leave this setup function empty for default config
-        -- or refer to the configuration section
-        -- for configuration options
-      }
-    end,
-
-    -- optionally set the colorscheme within lazy config
-    init = function()
-      -- vim.cmd.colorscheme 'poimandres'
-    end,
-  },
-  {
-    '0xstepit/flow.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
-  {
-    'webhooked/kanso.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('kanso').setup {
-        background = { -- map the value of 'background' option to a theme
-          dark = 'mist', -- try "zen", "mist" or "pearl" !
-          light = 'mist', -- try "zen", "mist" or "pearl" !
+  'catppuccin/nvim',
+  name = 'catppuccin',
+  priority = 1000,
+  init = function()
+    vim.cmd.colorscheme 'catppuccin-macchiato'
+  end,
+  opts = {
+    {
+      flavour = 'macchiato', -- latte, frappe, macchiato, mocha
+      background = { -- :h background
+        light = 'frappe',
+        dark = 'macchiato',
+      },
+      transparent_background = true, -- disables setting the background color.
+      float = {
+        transparent = true, -- enable transparent floating windows
+        solid = true, -- use solid styling for floating windows, see |winborder|
+      },
+      show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+      term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+      dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = 'dark',
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+      },
+      no_italic = false, -- Force no italic
+      no_bold = false, -- Force no bold
+      no_underline = false, -- Force no underline
+      styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { 'italic' }, -- Change the style of comments
+        conditionals = { 'italic' },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
+      },
+      lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
+        virtual_text = {
+          errors = { 'italic' },
+          hints = { 'italic' },
+          warnings = { 'italic' },
+          information = { 'italic' },
+          ok = { 'italic' },
         },
-        vim.cmd.colorscheme 'kanso',
-      }
-    end,
+        underlines = {
+          errors = { 'underline' },
+          hints = { 'underline' },
+          warnings = { 'underline' },
+          information = { 'underline' },
+          ok = { 'underline' },
+        },
+        inlay_hints = {
+          background = true,
+        },
+      },
+      color_overrides = {},
+      custom_highlights = {},
+      default_integrations = true,
+      auto_integrations = true,
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        notify = true,
+        mini = {
+          enabled = true,
+          indentscope_color = '',
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+      },
+    },
   },
 }
