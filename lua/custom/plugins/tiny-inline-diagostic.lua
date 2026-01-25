@@ -143,7 +143,7 @@ return {
       },
 
       -- List of filetypes to disable the plugin for
-      disabled_ft = {},
+      disabled_ft = { 'lazy' },
     }
     vim.diagnostic.config { virtual_text = false }
   end,
