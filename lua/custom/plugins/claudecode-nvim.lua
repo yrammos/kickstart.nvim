@@ -3,7 +3,47 @@ return {
   dependencies = { 'folke/snacks.nvim' },
   config = true,
   opts = {
-    terminal_cmd = '~/.local/bin/claude', -- Point to local installation
+    port_range = { min = 10000, max = 65535 },
+    auto_start = true,
+    log_level = 'warn', -- "trace", "debug", "info", "warn", "error"
+    terminal_cmd = '~/.local/bin/claude',
+    -- When true, successful sends will focus the Claude terminal if already connected
+    focus_after_send = false,
+    -- Selection Tracking
+    track_selection = true,
+    visual_demotion_delay_ms = 50,
+    -- Terminal Configuration
+    terminal = {
+      split_side = 'right',
+      split_width_percentage = 0.40,
+      provider = 'auto', -- "auto", "snacks", "native", "external", "none", or custom provider table
+      auto_close = true,
+      snacks_win_opts = {},
+      provider_opts = {
+        -- Command for external terminal provider. Can be:
+        -- 1. String with %s placeholder: "alacritty -e %s" (backward compatible)
+        -- 2. String with two %s placeholders: "alacritty --working-directory %s -e %s" (cwd, command)
+        -- 3. Function returning command: function(cmd, env) return "alacritty -e " .. cmd end
+        external_terminal_cmd = nil,
+      },
+    },
+    -- Diff Integration
+    diff_opts = {
+      auto_close_on_accept = true,
+      vertical_split = true,
+      open_in_current_tab = true,
+      keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens
+    },
+  },
+  cmd = {
+    'ClaudeCode',
+    'ClaudeCodeFocus',
+    'ClaudeCodeSelectModel',
+    'ClaudeCodeAdd',
+    'ClaudeCodeSend',
+    'ClaudeCodeTreeAdd',
+    'ClaudeCodeDiffAccept',
+    'ClaudeCodeDiffDeny',
   },
   keys = {
     { '<leader>a', nil, desc = 'AI/Claude Code' },
