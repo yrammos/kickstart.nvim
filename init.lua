@@ -79,6 +79,13 @@ vim.o.confirm = true
 -- Set LSP logging level.
 vim.lsp.set_log_level 'warn'
 
+-- Automatically reload files changed outside of Neovim.
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
+  group = vim.api.nvim_create_augroup('auto-reload-files', { clear = true }),
+  command = 'if mode() != "c" | checktime | endif',
+})
+
 -- Delete LSP log if older than 24 hours.
 vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
