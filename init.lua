@@ -18,7 +18,7 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line.
 vim.o.showmode = false
 
--- Auto-save in swap.
+-- Autosave in swap.
 vim.g.updatecount = 100
 
 -- Highlight current line.
@@ -78,6 +78,18 @@ vim.o.confirm = true
 
 -- Set LSP logging level.
 vim.lsp.set_log_level 'warn'
+
+-- Delete LSP log if older than 24 hours.
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    local log = vim.fn.stdpath 'state' .. '/lsp.log'
+    local stat = vim.uv.fs_stat(log)
+    if stat and (os.time() - stat.mtime.sec) > 86400 then
+      os.remove(log)
+      vim.notify('Deleted stale LSP log', vim.log.levels.INFO)
+    end
+  end,
+})
 
 -- NOTE: BASIC KEYMAPS.
 
