@@ -86,13 +86,21 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHo
   command = 'if mode() != "c" | checktime | endif',
 })
 
--- Delete LSP log if older than 24 hours.
+-- Delete LSP log if older than 24 hours (cross-platform).
 vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
-    local log = vim.fn.stdpath 'state' .. '/lsp.log'
-    local stat = vim.uv.fs_stat(log)
-    if stat and (os.time() - stat.mtime.sec) > 86400 then
+    local state_dir = vim.fn.stdpath 'state'
+    local log = state_dir .. '/lsp.log'
+    local marker = state_dir .. '/lsp.log.cleared'
+
+    if not vim.uv.fs_stat(log) then return end
+
+    local marker_stat = vim.uv.fs_stat(marker)
+    local last_cleared = marker_stat and marker_stat.mtime.sec or 0
+
+    if (os.time() - last_cleared) > 86400 then
       os.remove(log)
+      io.open(marker, 'w'):close()
       vim.notify('Deleted stale LSP log', vim.log.levels.INFO)
     end
   end,
