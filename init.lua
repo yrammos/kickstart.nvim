@@ -464,6 +464,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
             },
           },
         },
+        ts_ls = {},
         ty = {},
         yamlls = {},
       }
