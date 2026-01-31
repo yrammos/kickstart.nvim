@@ -83,7 +83,7 @@ vim.lsp.set_log_level 'warn'
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
   group = vim.api.nvim_create_augroup('auto-reload-files', { clear = true }),
-  command = 'if mode() != "c" | checktime | endif',
+  command = 'if mode() != "c" && getcmdwintype() == "" | checktime | endif',
 })
 
 -- Delete LSP log if older than 24 hours (cross-platform).
