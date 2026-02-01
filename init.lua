@@ -93,7 +93,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
     local log = state_dir .. '/lsp.log'
     local marker = state_dir .. '/lsp.log.cleared'
 
-    if not vim.uv.fs_stat(log) then return end
+    if not vim.uv.fs_stat(log) then
+      return
+    end
 
     local marker_stat = vim.uv.fs_stat(marker)
     local last_cleared = marker_stat and marker_stat.mtime.sec or 0
@@ -669,7 +671,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
   -- NOTE: IMPORT SPECS FROM OTHER FILES.
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
-  require 'kickstart.plugins.lint',
+  -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
