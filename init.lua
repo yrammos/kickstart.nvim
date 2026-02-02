@@ -227,34 +227,52 @@ require('lazy').setup({ -- NOTE: Lazy specs.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       { 'folke/trouble.nvim' },
     },
-    opts = {
-      defaults = {
-        mappings = {
-          i = {
-            ['<C-t>'] = 'trouble',
-            ['<C-enter>'] = 'to_fuzzy_refine',
-          },
-          n = {
-            ['<C-t>'] = 'trouble',
-          },
-        },
-      },
-      pickers = {
-        colorscheme = {
-          enable_preview = true,
-        },
-      },
-      extensions = {
-        ['ui-select'] = {
-          theme = 'dropdown',
-        },
-        ['file_browser'] = {
-          theme = 'ivy',
-          hijack_netrw = true,
-        },
-      },
-    },
     config = function()
+      local trouble = require 'trouble.sources.telescope'
+      -- Opts doesn't work reliably in Lazy if config is also used,
+      -- so we rely on config entirely for Telescope setup.
+      require('telescope').setup {
+        defaults = {
+          layout_strategy = 'flex',
+          layout_config = {
+            preview_cutoff = 1,
+            flex = {
+              flip_columns = 150,
+            },
+            horizontal = {
+              preview_width = 0.6,
+            },
+            vertical = {
+              preview_cutoff = 1,
+              mirror = true,
+            },
+          },
+          mappings = {
+            i = {
+              -- Fixed: Passing the actual function instead of a string
+              ['<C-t>'] = trouble.open,
+              ['<C-enter>'] = 'to_fuzzy_refine',
+            },
+            n = {
+              ['<C-t>'] = trouble.open,
+            },
+          },
+        },
+        pickers = {
+          colorscheme = {
+            enable_preview = true,
+          },
+        },
+        extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown(),
+          },
+          ['file_browser'] = {
+            theme = 'ivy',
+            hijack_netrw = true,
+          },
+        },
+      }
       -- Protect-call Telescope extensions (if they are installed).
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
