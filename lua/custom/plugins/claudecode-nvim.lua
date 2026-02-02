@@ -1,12 +1,12 @@
 return {
   'coder/claudecode.nvim',
-  dependencies = { 'folke/snacks.nvim' },
+  -- dependencies = { 'folke/snacks.nvim' },
   config = true,
   opts = {
     port_range = { min = 10000, max = 65535 },
     auto_start = true,
     log_level = 'warn', -- "trace", "debug", "info", "warn", "error"
-    terminal_cmd = '~/.local/bin/claude',
+    terminal_cmd = vim.fn.expand '~/.local/bin/claude',
     -- When true, successful sends will focus the Claude terminal if already connected.
     focus_after_send = false,
     -- Selection Tracking.
@@ -16,9 +16,9 @@ return {
     terminal = {
       split_side = 'right',
       split_width_percentage = 0.40,
-      provider = 'auto', -- "auto", "snacks", "native", "external", "none", or custom provider table
+      provider = 'external', -- "auto", "snacks", "native", "external", "none", or custom provider table
       auto_close = true,
-      snacks_win_opts = {},
+      -- snacks_win_opts = {},
       cwd_provider = function(ctx) -- Determines the working directory for Claude Code.
         -- Prefer repo root; fallback to file's directory.
         local cwd = require('claudecode.cwd').git_root(ctx.file_dir or ctx.cwd) or ctx.file_dir or ctx.cwd
@@ -29,7 +29,8 @@ return {
         -- 1. String with %s placeholder: "alacritty -e %s" (backward compatible).
         -- 2. String with two %s placeholders: "alacritty --working-directory %s -e %s" (cwd, command).
         -- 3. Function returning command: function(cmd, env) return "alacritty -e " .. cmd end.
-        external_terminal_cmd = nil,
+        -- external_terminal_cmd = nil,
+        external_terminal_cmd = 'zellij action new-pane --close-on-exit -- %s',
       },
     },
     -- Diff Integration
