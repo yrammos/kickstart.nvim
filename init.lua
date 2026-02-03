@@ -18,6 +18,9 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line.
 vim.o.showmode = false
 
+-- Hide the command line area (messages appear as floating windows).
+vim.o.cmdheight = 0
+
 -- Autosave in swap.
 vim.g.updatecount = 100
 
@@ -638,12 +641,33 @@ require('lazy').setup({ -- NOTE: Lazy specs.
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       require('mini.surround').setup()
       require('mini.icons').setup()
-      local statusline = require 'mini.statusline'
-      statusline.setup { use_icons = true }
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      require('mini.statusline').setup {
+        use_icons = true,
+        content = {
+          active = function()
+            local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+            local git = MiniStatusline.section_git { trunc_width = 40 }
+            local diff = MiniStatusline.section_diff { trunc_width = 75 }
+            local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
+            local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
+            local filename = MiniStatusline.section_filename { trunc_width = 140 }
+            local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 120 }
+            local searchcount = MiniStatusline.section_searchcount { trunc_width = 75 }
+
+            local bufnr = '(' .. vim.api.nvim_get_current_buf() .. ')'
+
+            return MiniStatusline.combine_groups {
+              { hl = mode_hl, strings = { mode } },
+              { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
+              '%<',
+              { hl = 'MiniStatuslineFilename', strings = { filename } },
+              '%=',
+              { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+              { hl = mode_hl, strings = { searchcount, '%2l:%-2v', bufnr } },
+            }
+          end,
+        },
+      }
       -- Starter screen.
       local starterscreen = require 'mini.starter'
       starterscreen.setup {
