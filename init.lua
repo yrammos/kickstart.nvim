@@ -31,7 +31,7 @@ vim.opt.cursorline = true
 vim.o.linebreak = true
 
 -- Scrolling context.
-vim.o.scrolloff = 1
+vim.o.scrolloff = 999
 vim.o.sidescrolloff = 3
 
 -- Relying on blink.cmp for autocompletion on the command line.
@@ -72,9 +72,6 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions within buffer.
 vim.o.inccommand = 'nosplit'
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 999
 
 -- Ask for confirmation before closing dirty buffers.
 vim.o.confirm = true
@@ -144,7 +141,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Install lazy.nvim.
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not (vim.uv).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
   local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
   if vim.v.shell_error ~= 0 then
@@ -204,10 +201,13 @@ require('lazy').setup({ -- NOTE: Lazy specs.
       },
       -- Document key chains defined by various plugins.
       spec = {
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>a', group = '[A]I' },
+        { '<leader>b', group = '[B]reakpoint' },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>x', group = 'Diagnosti[x]' },
       },
     },
   },
@@ -343,10 +343,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc, mode)
-            mode = mode or 'n'
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          end
+          local map = require('utils.keymap').buf_map(event.buf, 'LSP: ')
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
@@ -405,21 +402,10 @@ require('lazy').setup({ -- NOTE: Lazy specs.
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
-        virtual_text = {
-          source = 'if_many',
-          spacing = 2,
-          format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
-            }
-            return diagnostic_message[diagnostic.severity]
-          end,
-        },
-        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Op[E]n diagnostics float' }),
       }
+
+      -- nvm-lspconfig: diagnostics keymap.
+      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Op[E]n diagnostics float' })
 
       -- nvim-lspconfig: append blink.cmp capabilities.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -428,6 +414,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
       local servers = {
         cssls = {},
         eslint = {},
+        html = {},
         jsonls = {},
         lemminx = {},
         ltex_plus = {
@@ -581,19 +568,6 @@ require('lazy').setup({ -- NOTE: Lazy specs.
     event = 'VimEnter',
     build = 'cargo +nightly build --release',
     version = '1.*',
-    dependencies = {
-      {
-        -- Snippet Engine
-        'L3MON4D3/LuaSnip',
-        version = '2.*',
-        build = (function()
-          -- Build Step is needed for regex support in snippets.
-          return 'make install_jsregexp'
-        end)(),
-        opts = {},
-      },
-      'folke/lazydev.nvim',
-    },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
     opts = {
@@ -620,7 +594,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
           copilot = { name = 'copilot', module = 'blink-cmp-copilot', score_offset = 100, async = true },
         },
       },
-      snippets = { preset = 'luasnip' },
+      snippets = { preset = 'default' },
       fuzzy = { implementation = 'lua' },
       signature = { enabled = true, window = { border = 'single' } },
     },
@@ -628,7 +602,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
 
   { -- Highlight todo, notes, etc. in comments.
     'folke/todo-comments.nvim',
-    event = 'VimEnter',
+    event = 'BufReadPost',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },

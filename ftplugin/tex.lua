@@ -19,14 +19,7 @@ vim.api.nvim_buf_create_user_command(0, 'TexlabXeLaTeX', function()
   set_engine_arg_to '-xelatex'
 end, { desc = 'Set engine to XeLaTeX' })
 
-local map = function(keys, func, desc, mode)
-  mode = mode or 'n'
-  vim.keymap.set(mode, keys, func, {
-    buffer = true, -- Crucial: only active in this TeX buffer
-    silent = true,
-    desc = 'TeXLab: ' .. desc,
-  })
-end
+local map = require('utils.keymap').buf_map(true, 'TeXLab: ')
 
 map('<localleader>ll', '<cmd>LspTexlabBuild<cr>', 'Bui[l]d')
 map('<localleader>lk', '<cmd>LspTexlabCancelBuild<cr>', 'Cancel Build')
