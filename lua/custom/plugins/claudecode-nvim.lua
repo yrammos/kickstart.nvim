@@ -30,7 +30,7 @@ return {
         -- 2. String with two %s placeholders: "alacritty --working-directory %s -e %s" (cwd, command).
         -- 3. Function returning command: function(cmd, env) return "alacritty -e " .. cmd end.
         -- external_terminal_cmd = nil,
-        external_terminal_cmd = 'zellij action new-pane --close-on-exit -- %s',
+        external_terminal_cmd = 'zellij action new-pane --floating --width 80%% --height 80%% --close-on-exit -- %s',
       },
     },
     -- Diff Integration
