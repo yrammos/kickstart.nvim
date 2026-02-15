@@ -474,7 +474,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
                 labelDefinitionCommands = {},
                 labelReferenceCommands = {},
               },
-              latexFormatter = 'texlab',
+              latexFormatter = 'latexindent',
               chktex = {
                 onOpenAndSave = true,
                 onEdit = true,
@@ -533,13 +533,19 @@ require('lazy').setup({ -- NOTE: Lazy specs.
           }
         end
       end,
+      formatters = {
+        latexindent = {
+          prepend_args = { '-m', '-l=' .. vim.fn.expand '~/.latexindent.yaml' .. ',.latexindent.yaml' },
+        },
+      },
       formatters_by_ft = {
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" }.
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true }.
         angular = { 'prettierd' },
-        context = { 'tex-fmt' },
+        bibtex = { 'latexindent' },
+        context = { 'latexindent' },
         css = { 'prettierd' },
         flow = { 'prettierd' },
         graphql = { 'prettierd' },
@@ -547,14 +553,14 @@ require('lazy').setup({ -- NOTE: Lazy specs.
         javascript = { 'eslint_d' },
         json = { 'prettierd' },
         jsx = { 'prettierd' },
-        latex = { 'tex-fmt' },
+        latex = { 'latexindent' },
         less = { 'prettierd' },
         lua = { 'stylua' },
         markdown = { 'prettierd' },
         plaintex = { 'tex-fmt' },
         python = { 'ruff_format' },
         scss = { 'prettierd' },
-        tex = { 'tex-fmt' },
+        tex = { 'latexindent' },
         typescript = { 'prettierd' },
         vue = { 'prettierd' },
         xml = { 'xmlformat' },
