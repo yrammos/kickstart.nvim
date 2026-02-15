@@ -117,4 +117,8 @@ function M.on_attach()
   end
 end
 
-return M
+-- Register as a requireable module. This file lives in custom/plugins/
+-- which lazy.nvim scans for plugin specs, so we return {} as a valid
+-- empty spec and expose the module via package.loaded instead.
+package.loaded['ltex_ls_plus_ui'] = M
+return {}

@@ -419,9 +419,9 @@ require('lazy').setup({ -- NOTE: Lazy specs.
         lemminx = {},
         ltex_plus = {
           on_attach = function()
-            require('custom.ltex-ls-plus-ui').on_attach()
+            require('ltex_ls_plus_ui').on_attach()
           end,
-          settings = require('custom.ltex-ls-plus-ui').settings(),
+          settings = require('ltex_ls_plus_ui').settings(),
           filetypes = { 'bibtex', 'context', 'context.tex', 'latex', 'markdown', 'mdx', 'org', 'restructuredtext', 'rsweave', 'tex' },
         },
         lua_ls = {
