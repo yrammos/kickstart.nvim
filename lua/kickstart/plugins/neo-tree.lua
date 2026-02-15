@@ -209,7 +209,7 @@ return {
     nesting_rules = {},
     filesystem = {
       filtered_items = {
-        visible = true, -- when true, they will just be displayed differently than normal items
+        visible = false, -- when true, they will just be displayed differently than normal items
         hide_dotfiles = true,
         hide_gitignored = true,
         hide_ignored = true, -- hide files that are ignored by other gitignore-like files
@@ -224,8 +224,6 @@ return {
           --"node_modules"
         },
         hide_by_pattern = { -- uses glob style patterns
-          --"*.meta",
-          --"*/src/*/tsconfig.json",
         },
         always_show = { -- remains visible even if other settings would normally hide it
           --".gitignored",
