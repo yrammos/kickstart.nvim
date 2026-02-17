@@ -1,7 +1,8 @@
 return {
 
-  { -- Linting
+  { -- Linting (disabled — uncomment enabled to use).
     'mfussenegger/nvim-lint',
+    enabled = false,
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
