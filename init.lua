@@ -212,107 +212,6 @@ require('lazy').setup({ -- NOTE: Lazy specs.
     },
   },
 
-  { -- Telescope.
-    'nvim-telescope/telescope.nvim',
-    event = 'VimEnter',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
-      -- Replace the default vim.ui.select() with telescope.
-      { 'nvim-telescope/telescope-ui-select.nvim' },
-      -- Use pretty icons if a Nerd font is available.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-      { 'folke/trouble.nvim' },
-    },
-    config = function()
-      local trouble = require 'trouble.sources.telescope'
-      -- Opts doesn't work reliably in Lazy if config is also used,
-      -- so we rely on config entirely for Telescope setup.
-      require('telescope').setup {
-        defaults = {
-          layout_strategy = 'flex',
-          layout_config = {
-            preview_cutoff = 1,
-            flex = {
-              flip_columns = 150,
-            },
-            horizontal = {
-              preview_width = 0.6,
-            },
-            vertical = {
-              preview_cutoff = 1,
-              mirror = true,
-            },
-          },
-          mappings = {
-            i = {
-              -- Fixed: Passing the actual function instead of a string
-              ['<C-t>'] = trouble.open,
-              ['<C-enter>'] = 'to_fuzzy_refine',
-            },
-            n = {
-              ['<C-t>'] = trouble.open,
-            },
-          },
-        },
-        pickers = {
-          colorscheme = {
-            enable_preview = true,
-          },
-        },
-        extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
-          ['file_browser'] = {
-            theme = 'ivy',
-            hijack_netrw = true,
-          },
-        },
-      }
-      -- Protect-call Telescope extensions (if they are installed).
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'file_browser')
-      -- Telescope keymaps.
-      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', require('telescope.builtin').oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>sb', function()
-        require('telescope').extensions.file_browser.file_browser()
-      end, { desc = '[S]earch with [B]rowser' })
-      vim.keymap.set('n', '<leader>/', function()
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
-      vim.keymap.set('n', '<leader>s/', function()
-        require('telescope.builtin').live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
-      -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function()
-        require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [N]eovim files' })
-    end,
-  },
-
   { -- Extended lua_lsp settings for neovim development.
     'folke/lazydev.nvim',
     ft = 'lua',
@@ -347,13 +246,13 @@ require('lazy').setup({ -- NOTE: Lazy specs.
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('grr', function() Snacks.picker.lsp_references() end, '[G]oto [R]eferences')
+          map('gri', function() Snacks.picker.lsp_implementations() end, '[G]oto [I]mplementation')
+          map('grd', function() Snacks.picker.lsp_definitions() end, '[G]oto [D]efinition')
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
-          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
-          map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+          map('gO', function() Snacks.picker.lsp_symbols() end, 'Open Document Symbols')
+          map('gW', function() Snacks.picker.lsp_workspace_symbols() end, 'Open Workspace Symbols')
+          map('grt', function() Snacks.picker.lsp_type_definitions() end, '[G]oto [T]ype Definition')
 
           -- LspAttach(): Highlight references of the word under the cursor.
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -646,7 +545,14 @@ require('lazy').setup({ -- NOTE: Lazy specs.
           starterscreen.sections.builtin_actions(),
           starterscreen.sections.recent_files(10, false),
           starterscreen.sections.recent_files(10, true),
-          starterscreen.sections.telescope(),
+          {
+            { action = 'lua Snacks.picker.explorer()',  name = 'Browser',         section = 'Picker' },
+            { action = 'lua Snacks.picker.command_history()', name = 'Command history', section = 'Picker' },
+            { action = 'lua Snacks.picker.files()',     name = 'Files',           section = 'Picker' },
+            { action = 'lua Snacks.picker.help()',      name = 'Help tags',       section = 'Picker' },
+            { action = 'lua Snacks.picker.grep()',      name = 'Live grep',       section = 'Picker' },
+            { action = 'lua Snacks.picker.recent()',    name = 'Old files',       section = 'Picker' },
+          },
           -- Use this if you set up 'mini.sessions'
           -- starterscreen.sections.sessions(5, true),
         },

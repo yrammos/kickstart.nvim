@@ -28,7 +28,4 @@ vim.keymap.set('n', 'X', '"_X', { noremap = true })
 vim.keymap.set('n', '<C-n>', '<cmd>bnext<CR>', { silent = true })
 vim.keymap.set('n', '<C-p>', '<cmd>bprev<CR>', { silent = true })
 
--- Telescope
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-
 return {}
