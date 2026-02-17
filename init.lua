@@ -545,7 +545,7 @@ require('lazy').setup({ -- NOTE: Lazy specs.
         less = { 'prettierd' },
         lua = { 'stylua' },
         markdown = { 'prettierd' },
-        plaintex = { 'tex-fmt' },
+        plaintex = { 'latexindent' },
         python = { 'ruff_format' },
         scss = { 'prettierd' },
         tex = { 'latexindent' },
