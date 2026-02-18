@@ -10,14 +10,6 @@ return {
         keys = {
           { key = 'e', icon = ' ', desc = 'New File', action = ':enew' },
           {
-            key = 'b',
-            icon = ' ',
-            desc = 'Browser',
-            action = function()
-              Snacks.picker.explorer()
-            end,
-          },
-          {
             key = 'c',
             icon = ' ',
             desc = 'Command history',
@@ -57,6 +49,15 @@ return {
               Snacks.picker.recent()
             end,
           },
+          {
+            key = 't',
+            icon = ' ',
+            desc = 'File Tree',
+            action = function()
+              vim.cmd 'Neotree show'
+            end,
+          },
+
           { key = 'q', icon = ' ', desc = 'Quit', action = ':qa' },
         },
       },
@@ -186,13 +187,13 @@ return {
       end,
       desc = '[ ] Find existing buffers',
     },
-    {
-      '<leader>sb',
-      function()
-        Snacks.picker.explorer()
-      end,
-      desc = '[S]earch with [B]rowser',
-    },
+    -- {
+    --   '<leader>sb',
+    --   function()
+    --     Snacks.picker.explorer()
+    --   end,
+    --   desc = '[S]earch with [B]rowser',
+    -- },
     {
       '<leader>/',
       function()
