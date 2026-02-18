@@ -4,7 +4,6 @@ return {
   config = function()
     -- a/i text objects.
     require('mini.ai').setup { n_lines = 500 }
-    -- Add/delete/replace surroundings (brackets, quotes, etc.)
     require('mini.surround').setup()
     require('mini.icons').setup()
     require('mini.statusline').setup {
@@ -32,34 +31,6 @@ return {
             { hl = mode_hl, strings = { searchcount, '%2l:%-2v', bufnr } },
           }
         end,
-      },
-    }
-    -- Starter screen.
-    local starterscreen = require 'mini.starter'
-    starterscreen.setup {
-      evaluate_single = true,
-      header = '',
-      footer = '',
-      items = {
-        starterscreen.sections.builtin_actions(),
-        starterscreen.sections.recent_files(10, false),
-        starterscreen.sections.recent_files(10, true),
-        {
-          { action = 'lua Snacks.picker.explorer()',  name = 'Browser',         section = 'Picker' },
-          { action = 'lua Snacks.picker.command_history()', name = 'Command history', section = 'Picker' },
-          { action = 'lua Snacks.picker.files()',     name = 'Files',           section = 'Picker' },
-          { action = 'lua Snacks.picker.help()',      name = 'Help tags',       section = 'Picker' },
-          { action = 'lua Snacks.picker.grep()',      name = 'Live grep',       section = 'Picker' },
-          { action = 'lua Snacks.picker.recent()',    name = 'Old files',       section = 'Picker' },
-        },
-        -- Use this if you set up 'mini.sessions'
-        -- starterscreen.sections.sessions(5, true),
-      },
-      content_hooks = {
-        starterscreen.gen_hook.adding_bullet(),
-        starterscreen.gen_hook.aligning('center', 'center'),
-        starterscreen.gen_hook.indexing('all', { 'Builtin actions' }),
-        starterscreen.gen_hook.padding(3, 2),
       },
     }
     -- Diff view for buffers.
