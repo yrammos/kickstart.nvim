@@ -17,7 +17,7 @@ return {
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
     popup_border_style = 'NC', -- or "" to use 'winborder' on Neovim v0.11+
     clipboard = {
-      sync = 'none', -- or "global"/"universal" to share a clipboard for each/all Neovim instance(s), respectively
+      sync = 'global', -- or "global"/"universal" to share a clipboard for each/all Neovim instance(s), respectively
     },
     enable_git_status = true,
     enable_diagnostics = true,
@@ -37,7 +37,7 @@ return {
         enable_character_fade = true,
       },
       indent = {
-        indent_size = 2,
+        indent_size = 3,
         padding = 1, -- extra padding on left hand side
         -- indent guides
         with_markers = true,
@@ -162,7 +162,7 @@ return {
         ['C'] = 'close_node',
         -- ['C'] = 'close_all_subnodes',
         ['z'] = 'close_all_nodes',
-        --["Z"] = "expand_all_nodes",
+        ['Z'] = 'expand_all_nodes',
         --["Z"] = "expand_all_subnodes",
         ['a'] = {
           'add',
@@ -210,7 +210,7 @@ return {
     filesystem = {
       filtered_items = {
         visible = false, -- when true, they will just be displayed differently than normal items
-        hide_dotfiles = true,
+        hide_dotfiles = false,
         hide_gitignored = true,
         hide_ignored = true, -- hide files that are ignored by other gitignore-like files
         -- other gitignore-like files, in descending order of precedence.
