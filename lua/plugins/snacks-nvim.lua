@@ -61,7 +61,6 @@ return {
           { key = 'q', icon = ' ', desc = 'Quit', action = ':qa' },
         },
       },
-
       sections = {
         { section = 'keys', gap = 1, padding = 1 },
         { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', height = 10, indent = 2, padding = 1 },
@@ -83,6 +82,12 @@ return {
         { section = 'startup' },
       },
     },
+    indent = {
+      animate = { enabled = false },
+      indent = { enabled = true, only_scope = false },
+      scope = { enabled = true },
+    },
+
     picker = {
       enabled = true,
       ui_select = true,
